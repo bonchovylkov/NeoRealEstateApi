@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RealEstateData;
+using RealEstateModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,6 +14,14 @@ namespace RaelEstateApi.Controllers
         // GET api/values
         public IEnumerable<string> Get()
         {
+            var context = new RealEstateContext();
+            var user = new User();
+            user.Nickname = "Kostaa";
+            user.Username = "Markov";
+            user.AuthCode = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            context.Users.Add(user);
+            context.SaveChanges();
+
             return new string[] { "value1", "value2" };
         }
 

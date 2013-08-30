@@ -16,9 +16,9 @@ namespace RealEstateData
 
         }
 
-        public DbSet<Advert> Users { get; set; }
-        public DbSet<Town> Posts { get; set; }
+        public DbSet<Advert> Adverts { get; set; }
+        public DbSet<Town> Towns { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<User> Comments { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
