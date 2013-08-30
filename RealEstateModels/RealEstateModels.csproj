@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Advert.cs" />
+    <Compile Include="Picture.cs" />
+    <Compile Include="Role.cs" />
     <Compile Include="Tag.cs" />
     <Compile Include="Town.cs" />
     <Compile Include="User.cs" />

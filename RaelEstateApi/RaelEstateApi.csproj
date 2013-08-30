@@ -165,10 +165,12 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdvertFullModel.cs" />
+    <Compile Include="Models\AdvertModel.cs" />
+    <Compile Include="Models\AdvertResponseModel.cs" />
     <Compile Include="Models\LoggedUserModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

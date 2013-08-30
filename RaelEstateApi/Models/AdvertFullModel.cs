@@ -9,20 +9,31 @@ namespace RaelEstateApi.Models
     [DataContract]
     public class AdvertFullModel
     {
+        [DataMember(Name="id")]
         public int Id { get; set; }
 
+        [DataMember(Name = "headline")]
         public string Headline { get; set; }
 
+        [DataMember(Name = "text")]
         public string Text { get; set; }
 
-        public string[] Pictures { get; set; }
+        [DataMember(Name = "pictures")]
+        public IEnumerable<string> Pictures { get; set; }
 
+        [DataMember(Name = "town")]
         public string Town { get; set; }
 
+        [DataMember(Name = "address")]
         public string Address { get; set; }
 
-        public string PostedBy { get; set; }
+        [DataMember(Name = "tags")]
+        public IEnumerable<string> Tags { get; set; }
 
-        public string[] Tags { get; set; }
+        [DataMember(Name="postDate")]
+        public DateTime PostDate { get; set; }
+
+        [DataMember(Name="price")]
+        public decimal Price { get; set; }
     }
 }

@@ -39,13 +39,13 @@ namespace RaelEstateApi.Controllers
                     using (context)
                     {
                         this.ValidateUsername(model.Username);
-                        this.ValidateNickname(model.Nickname);
+                        this.ValidateNickname(model.FullName);
                         this.ValidateAuthCode(model.AuthCode);
                         var usernameToLower = model.Username.ToLower();
-                        var nicknameToLower = model.Nickname.ToLower();
+                        var nicknameToLower = model.FullName.ToLower();
                         var user = context.Users.FirstOrDefault(
                             usr => usr.Username == usernameToLower
-                            || usr.Nickname.ToLower() == nicknameToLower);
+                            || usr.FullName.ToLower() == nicknameToLower);
 
                         if (user != null)
                         {
@@ -55,7 +55,7 @@ namespace RaelEstateApi.Controllers
                         user = new User()
                         {
                             Username = usernameToLower,
-                            Nickname = model.Nickname,
+                            FullName = model.FullName,
                             AuthCode = model.AuthCode
                         };
 
@@ -67,7 +67,7 @@ namespace RaelEstateApi.Controllers
 
                         var loggedModel = new LoggedUserModel()
                         {
-                            Nickname = user.Nickname,
+                            FullName = user.FullName,
                             SessionKey = user.SessionKey
                         };
 
@@ -111,7 +111,7 @@ namespace RaelEstateApi.Controllers
 
                       var loggedModel = new LoggedUserModel()
                       {
-                          Nickname = user.Nickname,
+                          FullName = user.FullName,
                           SessionKey = user.SessionKey
                       };
 

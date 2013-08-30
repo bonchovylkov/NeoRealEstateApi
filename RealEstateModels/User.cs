@@ -10,10 +10,10 @@ namespace RealEstateModels
     {
         public int Id { get; set; }
         public string Username { get; set; }
-        public string Nickname { get; set; }
+        public string FullName { get; set; }
         public string AuthCode { get; set; }
         public string SessionKey { get; set; }
-        public bool IsAdmin { get; set; }
+        public virtual Role Role { get; set; }
 
         public virtual ICollection<Advert> Adverts { get; set; }
 

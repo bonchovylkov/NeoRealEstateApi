@@ -14,11 +14,14 @@ namespace RaelEstateApi.Models
 
         [DataMember(Name="headline")]
         public string Headline { get; set; }
-        
-        [DataMember(Name = "tags")]
-        public string[] Tags { get; set; }
 
         [DataMember(Name = "town")]
         public string Town { get; set; }
+
+        [DataMember(Name="postDate")]
+        public DateTime PostDate { get; set; }
+
+        [DataMember(Name= "tags")]
+        public IEnumerable<string> Tags { get; set; }
     }
 }

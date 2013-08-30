@@ -6,13 +6,13 @@ using System.Web;
 
 namespace RaelEstateApi.Models
 {
-    [DataContract(Name = "LoggedUser")]
+    [DataContract]
     public class LoggedUserModel
     {
         [DataMember(Name = "sessionKey")]
         public string SessionKey { get; set; }
 
-        [DataMember(Name = "displayName")]
-        public string Nickname { get; set; }
+        [DataMember(Name = "fullName")]
+        public string FullName { get; set; }
     }
 }
