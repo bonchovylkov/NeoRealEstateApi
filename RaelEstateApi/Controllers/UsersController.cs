@@ -56,7 +56,8 @@ namespace RaelEstateApi.Controllers
                         {
                             Username = usernameToLower,
                             FullName = model.FullName,
-                            AuthCode = model.AuthCode
+                            AuthCode = model.AuthCode,
+                            Role= new Role{UserRole= model.Role}
                         };
 
                         context.Users.Add(user);

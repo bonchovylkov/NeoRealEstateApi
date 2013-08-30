@@ -17,5 +17,8 @@ namespace RaelEstateApi.Models
 
         [DataMember(Name="authCode")]
         public string AuthCode { get; set; }
+
+        [DataMember(Name = "role")]
+        public string Role { get; set; }
     }
 }
