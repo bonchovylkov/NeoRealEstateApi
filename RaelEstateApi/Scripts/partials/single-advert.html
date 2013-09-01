@@ -2,24 +2,26 @@
 </span>
 
 <script type="text/x-kendo-template" id="details-template">
-    <h3> #= headline#</h3>
-    <p>Town: 
-        <span> #= town#</span>
-    </p>
-    <p>
-        Address:
-        <span> #= address#</span>
-    </p>
-    <p>
-        Price:
-        <span> #= price#</span>
-    </p>
-    <p>
-        Post Date:
-        <span> #= postDate#</span>
-    </p>
-
-    <div id="myCarousel" class="carousel slide">
+    <div class="row-fluid">
+        <h3 class="span12 text-center"> #= headline#</h3>
+        <span class="span12">
+            Town:
+            <span> #= town#</span>
+        </span>
+        <span class="span12">
+            Address:
+            <span> #= address#</span>
+        </span>
+        <span class="span12">
+            Price:
+            <span> #= price#</span>
+        </span>
+        <span class="span12">
+            Post Date:
+            <span> #= postDate#</span>
+        </span>
+    </div>
+    <div id="myCarousel" class="carousel slide row-fluid">
         <ol class="carousel-indicators">
             <li data-target="\#myCarousel" class="active" data-slide-to="0"></li>
             # for (i = 1; i < pictures.length; i++) {#

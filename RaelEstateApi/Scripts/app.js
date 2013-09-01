@@ -3,7 +3,7 @@
 
 var application= (function () {
     var appLayout =
-		new kendo.Layout('<div id="main-content"></div><div id="advert-details"></div>');
+		new kendo.Layout('<div id="main-content" class="span7"></div><div id="advert-details" class="span5 offset1"></div>');
     var data = persisters.get("http://localhost:38338/api/");
     vmFactory.setPersister(data);
 
@@ -24,7 +24,10 @@ var application= (function () {
                         });
                     var view = new kendo.View(loginViewHtml,
                         { model: loginVm });
+                    
+                    $("#main-content").hide();
                     appLayout.showIn("#main-content", view);
+                    $("main-content").fadeIn(500);
 
                     $("#tabstrip").kendoTabStrip({
                         animation: {
@@ -58,8 +61,10 @@ var application= (function () {
                 var view = new kendo.View(advertViewHtml,
                     { model: advertVM });
                 console.log(advertVM)
-                appLayout.showIn("#advert-details", view);
 
+                $("#advert-details").hide();
+                appLayout.showIn("#advert-details", view);
+                $("#advert-details").fadeIn(500);
                 $("#myCarousel").carousel();
             })
         })
