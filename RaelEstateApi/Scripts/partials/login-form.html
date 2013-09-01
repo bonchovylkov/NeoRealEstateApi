@@ -1,8 +1,29 @@
-﻿<fieldset>
-    <legend>Login or register</legend>
-    <label  for="tb-username">Username</label>
-    <input data-bind="value: username" type="text" id="tb-username" />
-    <label for="tb-password">Password</label>
-    <input data-bind="value: password" type="text" id="tb-password" /><br />
-    <button class="btn btn-succsess" data-bind="click: login">Login</button>
-</fieldset>
+﻿<div id="tabstrip">
+
+    <ul>
+
+        <li class="k-state-active">Log in</li>
+        <li>Register</li>
+    </ul>
+    <a href="#/adverts" class="btn btn-info" id="adverts-btn">View Adverts</a>
+    <div id="login">
+
+        <label for="tb-login-username">Username: </label>
+        <input data-bind="value: username" type="text" id="tb-login-username" />
+        <label for="tb-login-password">Password: </label>
+        <input data-bind="value: password" type="text" id="tb-login-password" />
+        <br />
+        <button class="btn btn-info" id="btn-login" data-bind="click: login">login</button>
+    </div>
+    <div id="register">
+
+        <label for="tb-register-username">Username: </label>
+        <input data-bind="value: username" type="text" id="tb-register-username" />
+        <label for="tb-register-nickname">Nickname: </label>
+        <input data-bind="value: fullname" type="text" id="tb-register-nickname" />
+        <label for="tb-register-password">Password: </label>
+        <input data-bind="value: password" type="text" id="tb-register-password" />
+        <br />
+        <button class="btn btn-info" id="btn-register" data-bind="click: register">Register</button>
+    </div>
+</div>

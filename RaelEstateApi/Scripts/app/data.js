@@ -21,7 +21,7 @@ window.persisters = (function () {
 	    init: function (apiUrl) {
 	        this.apiUrl = apiUrl;
 	        this.users = new UsersPersister(apiUrl + "users/");
-	        this.accounts = new AccountsPersister(apiUrl +"accounts/");
+	        this.adverts = new AdvertsPersister(apiUrl +"adverts");
 	    }
 	});
 
@@ -33,32 +33,34 @@ window.persisters = (function () {
 			var user = {
 			    Username: username,
                 //for demo purpose
-			    AuthCode: password //CryptoJS.SHA1(password).toString()
+			    AuthCode: CryptoJS.SHA1(password).toString()
 			};
 			console.log(httpRequester);
 			return httpRequester.postJSON(this.apiUrl + "login", user)
 				.then(function (data) {
-				    saveSessionKey(data.SessionKey, data.FullName);
-				    sessionKey = data.SessionKey;
-				    bashUsername = data.FullName;
+				    saveSessionKey(data.sessionKey, data.fullname);
+				    sessionKey = data.sessionKey;
+				    bashUsername = data.fullname;
 				    //return data;
 				}, function (err) {
 				    console.log(err);
 				});
 		},
-		register: function (username, password) {
+		register: function (username, fullname, password) {
+		    debugger;
 		    var user = {
-		        Username: username,
-		        //for demo purpose
-		        AuthCode: password //CryptoJS.SHA1(password).toString()
+		        username: username,
+		        fullname: fullname,
+		        authCode: CryptoJS.SHA1(password).toString()
 		    };
             
 			return httpRequester.postJSON(this.apiUrl + "register", user)
 				.then(function (data) {
-				    saveSessionKey(data.SessionKey, data.FullName);
-				    sessionKey = data.SessionKey;
-				    bashUsername = data.FullName;
-				    return data.FullName;
+				    saveSessionKey(data.sessionKey, data.fullname);
+				    debugger;
+				    sessionKey = data.sessionKey;
+				    bashUsername = data.fullname;
+				    //return data.fullname;
 				});
 		},
 		logout: function () {
@@ -90,36 +92,36 @@ window.persisters = (function () {
 		}
 	});
 
-	var AccountsPersister = Class.create({
+	var AdvertsPersister = Class.create({
 		init: function (apiUrl) {
 		    this.apiUrl = apiUrl;
 		},
 		all: function () {
-		    return httpRequester.getJSON(this.apiUrl + "?sessionKey=" + localStorage.getItem("sessionKey"));
+		    return httpRequester.getJSON(this.apiUrl);
 		},
 		getById: function (id) {
-		    return httpRequester.getJSON(this.apiUrl +id+ "?sessionKey=" + localStorage.getItem("sessionKey"));
+		    return httpRequester.getJSON(this.apiUrl + "/" +id+ "?sessionKey=" + localStorage.getItem("sessionKey"));
 		},
-		deposit: function (sum,id) {
-		    return httpRequester.putJSON(this.apiUrl + id + "?depositSum=" + sum + "&sessionKey=" + localStorage.getItem("sessionKey"))
-                .then(function () {
-                    alert("in success");
-                }, function () {
-                    alert("You have just deposid money");
-                    var router = application.router();
-                    router.navigate("/");
-                });
-		},
-		withraw: function (sum, id) {
-		    return httpRequester.putJSON(this.apiUrl + id + "?withdrawSum=" + sum + "&sessionKey=" + localStorage.getItem("sessionKey"))
-                .then(function () {
-                    alert("in success");
-                }, function () {
-                    alert("You have just withraw money");
-                    var router = application.router();
-                    router.navigate("/");
-                });
-		}
+		//deposit: function (sum,id) {
+		//    return httpRequester.putJSON(this.apiUrl + id + "?depositSum=" + sum + "&sessionKey=" + localStorage.getItem("sessionKey"))
+        //        .then(function () {
+        //            alert("in success");
+        //        }, function () {
+        //            alert("You have just deposid money");
+        //            var router = application.router();
+        //            router.navigate("/");
+        //        });
+		//},
+		//withraw: function (sum, id) {
+		//    return httpRequester.putJSON(this.apiUrl + id + "?withdrawSum=" + sum + "&sessionKey=" + localStorage.getItem("sessionKey"))
+        //        .then(function () {
+        //            alert("in success");
+        //        }, function () {
+        //            alert("You have just withraw money");
+        //            var router = application.router();
+        //            router.navigate("/");
+        //        });
+		//}
 
 	});
 

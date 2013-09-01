@@ -28,9 +28,21 @@ window.viewsFactory = (function () {
 		return promise;
 	}
 
-	
+	function getLoginView() {
+	    return getTemplate("login-form");
+	}
+
+	function getAdvertsView() {
+	    return getTemplate("adverts-list");
+	}
+
+	function getSingleAdvertView() {
+	    return getTemplate("single-advert");
+	}
 
 	return {
-		
+	    getLoginView: getLoginView,
+	    getAdvertsView: getAdvertsView,
+	    getSingleAdvertView: getSingleAdvertView,
 	};
 }());

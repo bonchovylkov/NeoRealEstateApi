@@ -1,6 +1,6 @@
 ﻿#menu {
 
-width:550px;
+width:635px;
 }
 
 #tb-logout {
@@ -25,4 +25,22 @@ padding:15px !important;
 margin-left:180px;
 margin-bottom:15px;
 font-size:1.6em;
+}
+
+#adverts-btn {
+    position: absolute;
+    top: 75px;
+    right: 10px;
+}
+
+a:hover {
+    text-decoration:none !important;
+}
+
+img {
+    width: 99%;
+}
+
+#myCarousel{
+    width: 500px;
 }

@@ -79,6 +79,7 @@ namespace RaelEstateApi.Controllers
                 from advert in advertEntities
                 select new AdvertModel
                 {
+                    Id = advert.Id,
                     Headline = advert.Headline,
                     PostDate = advert.PostDate,
                     Town = advert.Town.Name,

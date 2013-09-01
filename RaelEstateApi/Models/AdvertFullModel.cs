@@ -15,7 +15,7 @@ namespace RaelEstateApi.Models
         [DataMember(Name = "headline")]
         public string Headline { get; set; }
 
-        [DataMember(Name = "text")]
+        [DataMember(Name = "content")]
         public string Text { get; set; }
 
         [DataMember(Name = "pictures")]

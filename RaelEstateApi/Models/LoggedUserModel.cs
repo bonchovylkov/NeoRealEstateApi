@@ -12,7 +12,7 @@ namespace RaelEstateApi.Models
         [DataMember(Name = "sessionKey")]
         public string SessionKey { get; set; }
 
-        [DataMember(Name = "fullName")]
+        [DataMember(Name = "fullname")]
         public string FullName { get; set; }
     }
 }

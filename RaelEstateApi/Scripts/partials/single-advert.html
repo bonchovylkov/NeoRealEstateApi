@@ -1,0 +1,43 @@
+﻿<span data-template="details-template" data-bind="source: detailedAdvert">
+</span>
+
+<script type="text/x-kendo-template" id="details-template">
+    <h3> #= headline#</h3>
+    <p>Town: 
+        <span> #= town#</span>
+    </p>
+    <p>
+        Address:
+        <span> #= address#</span>
+    </p>
+    <p>
+        Price:
+        <span> #= price#</span>
+    </p>
+    <p>
+        Post Date:
+        <span> #= postDate#</span>
+    </p>
+
+    <div id="myCarousel" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li data-target="\#myCarousel" class="active" data-slide-to="0"></li>
+            # for (i = 1; i < pictures.length; i++) {#
+            <li data-target="\#myCarousel" class="" data-slide-to="#=i#"></li>
+            #}#
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="#=pictures[0]#" alt="picture">
+            </div>
+
+            #for (i = 1; i < pictures.length; i++) {#
+            <div class="item">
+                <img src="#=pictures[i]#" alt="picture">
+            </div>
+            #}#
+        </div>
+        <a class="left carousel-control" href="\#myCarousel" data-slide="prev">‹</a>
+        <a class="right carousel-control" href="\#myCarousel" data-slide="next">›</a>
+    </div>
+</script>
