@@ -1,4 +1,5 @@
-﻿var templateLoader = (function ($, host) {
+﻿
+var templateLoader = (function ($, host) {
     return {
         loadExtTemplate: function (name, path) {
             $.ajax({
@@ -16,13 +17,13 @@
     };
 })(jQuery, document);
 
-$(function () {
+window.grid = (function (router) {
+
     var views = {};
-    templateLoader.loadExtTemplate("layout", "/content/views/layout.html");
+    templateLoader.loadExtTemplate("layout", "../../AdminDemo/layout.html");
     var layout = new kendo.Layout($('#layout-admin').html());
     layout.render($("#app"));
 
-    var router = new kendo.Router();
     var addRoute = function (route, name, path, forceRemoteLoad) {
         forceRemoteLoad = typeof forceRemoteLoad !== "undefined" ? forceRemoteLoad : false;
         router.route(route, function () {
@@ -40,6 +41,5 @@ $(function () {
         });
     };
 
-    addRoute("/edit-adverts", "products", "/Scripts/partials/products.html");
-    router.start();
+    addRoute("/edit-adverts", "products", "../../AdminDemo/products.html");
 });
