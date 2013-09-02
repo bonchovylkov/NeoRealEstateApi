@@ -165,7 +165,28 @@ namespace RaelEstateApi.Controllers
             return responseMsg;
         }
 
+        [HttpGet]
+        public HttpResponseMessage Get(string sessionKey)
+        {
+            var responseMsg = this.PerformOperationAndHandleExceptions(() =>
+            {
+                var context = new RealEstateContext();
 
+                var user = context.Users.FirstOrDefault(usr => usr.SessionKey == sessionKey);
+
+                var userModel = new LoggedUserModel() {
+                    FullName = user.FullName,
+                    Role = user.Role.UserRole,
+                    SessionKey = user.SessionKey
+                };
+
+                var response = this.Request.CreateResponse(HttpStatusCode.OK, userModel);
+
+                return response;
+            });
+
+            return responseMsg;
+        }
 
         private void ValidateAuthCode(string authCode)
         {

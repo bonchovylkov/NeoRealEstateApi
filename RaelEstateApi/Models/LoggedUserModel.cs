@@ -14,5 +14,8 @@ namespace RaelEstateApi.Models
 
         [DataMember(Name = "fullname")]
         public string FullName { get; set; }
+
+        [DataMember(Name="role")]
+        public string Role { get; set; }
     }
 }

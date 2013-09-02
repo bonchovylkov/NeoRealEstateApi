@@ -1,20 +1,30 @@
 ﻿/// <reference path="libs/_references.js" />
 
 
-var application= (function () {
+var application = (function () {
     var appLayout =
 		new kendo.Layout('<div id="main-content" class="span7"></div><div id="advert-details" class="span5 offset1"></div>');
     var data = persisters.get("http://localhost:38338/api/");
     vmFactory.setPersister(data);
 
     var router = new kendo.Router();
-   
+    
+    router.route("/special", function () {
+        debugger;
+        router.start();
+        router.navigate("/");
 
+    });
+    
     router.route("/", function () {
+        var grid = $("#body").parent("div");
+        if (grid) {
+            grid.hide();
+        }
         if (data.users.currentUser()) {
             router.navigate("/adverts");
         }
-        else{
+        else {
             viewsFactory.getLoginView()
                 .then(function (loginViewHtml) {
                     var loginVm = vmFactory.getLoginVM(
@@ -24,10 +34,10 @@ var application= (function () {
                         });
                     var view = new kendo.View(loginViewHtml,
                         { model: loginVm });
-                    
-                   // $("#main-content").hide();
+
+                    // $("#main-content").hide();
                     appLayout.showIn("#main-content", view);
-                   // $("main-content").fadeIn(500);
+                    // $("main-content").fadeIn(500);
 
                     $("#tabstrip").kendoTabStrip({
                         animation: {
@@ -39,8 +49,13 @@ var application= (function () {
                 });
         }
     });
-
+    
     router.route("/adverts", function () {
+        var grid = $("#body").parent("div");
+        if (grid) {
+            grid.hide();
+        }
+        
         if (data.users.currentUser()) {
             viewsFactory.getAdvertsViewWithLogOut()
             .then(function (advertsViewHtml) {
@@ -68,6 +83,10 @@ var application= (function () {
     });
 
     router.route("/adverts-:id", function (id) {
+        var grid = $("#body").parent("div");
+        if (grid) {
+            grid.hide();
+        }
         if (data.users.currentUser()) {
             viewsFactory.getSingleAdvertView()
             .then(function (advertViewHtml) {
@@ -91,11 +110,18 @@ var application= (function () {
 
     router.route("/advertsadmin", function () {
         if (data.users.currentUser()) {
-            $("#main-content").hide();
-            $("#advert-details").hide();
-            $("#tb-logout").show();
-            debugger;
-            grid(router);
+            data.users.isAdmin().then(function (isAdmin) {
+                if (isAdmin) {
+                    debugger;
+                    $("#main-content").hide();
+                    $("#advert-details").hide();
+                    $("#tb-logout").show();
+                    grid(router);
+                }
+                else {
+                    router.navigate("/");
+                }
+            })
         }
         else {
             router.navigate("/");

@@ -88,6 +88,12 @@ window.persisters = (function () {
 		},
 		currentUser: function () {
 		    return localStorage.getItem("displayName");
+		},
+		isAdmin: function () {
+		    return httpRequester.getJSON(this.apiUrl + "Get?sessionKey=" + localStorage.getItem("sessionKey"))
+                .then(function (user) {
+                    return user.role == "admin";
+                });
 		}
 	});
 
