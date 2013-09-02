@@ -19,7 +19,7 @@
 $(function () {
     var views = {};
     templateLoader.loadExtTemplate("layout", "/content/views/layout.html");
-    var layout = new kendo.Layout($('#layout-admin').html());
+    var layout = new kendo.Layout($('#layout').html());
     layout.render($("#app"));
 
     var router = new kendo.Router();
@@ -40,6 +40,14 @@ $(function () {
         });
     };
 
-    addRoute("/edit-adverts", "products", "/Scripts/partials/products.html");
+    addRoute("/", "home", "/content/views/home.html");
+    addRoute("/about", "about", "/content/views/about.html");
+    addRoute("/contact", "contact", "/content/views/contact.html");
+    addRoute("/categories", "categories", "/content/views/categories.html");
+    addRoute("/customers", "customers", "/content/views/customers.html");
+    addRoute("/products", "products", "/Scripts/partials/products.html");
+    addRoute("/other-products", "other-products", "/Scripts/partials/other-products.html");
+    addRoute("/productEdit/:id", "productEdit", "/Scripts/partials/productEdit.html");
+
     router.start();
 });

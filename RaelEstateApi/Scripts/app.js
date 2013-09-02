@@ -89,18 +89,6 @@ var application= (function () {
         }
     });
 
-    router.route("/advertsadmin", function () {
-        if (data.users.currentUser()) {
-            $("#main-content").hide();
-            $("#tb-logout").show();
-            debugger;
-            grid(router);
-        }
-        else {
-            router.navigate("/");
-        }
-    });
-
     $(function () {
         appLayout.render("#app");
         router.start();
