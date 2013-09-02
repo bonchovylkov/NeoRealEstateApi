@@ -1,0 +1,14 @@
+﻿
+<h1>Adverts</h1>
+        <ul data-template="car-template" data-bind="source: adverts">
+        </ul>
+
+<script type="text/x-kendo-template" id="car-template">
+    <li class="adverts">
+                <a class="view-details" href="\#/adverts/#: id #">
+                    <img class="main-image" src="Images/images/apartment.jpg"  alt="#: headline#" title="#: headline #" />
+                    <strong data-bind="text: headline"></strong>
+                    <span class="price"><span>$</span><span data-bind="text: price"></span></span>
+                </a>
+            </li>
+</script>

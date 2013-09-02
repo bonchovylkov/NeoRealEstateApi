@@ -1,0 +1,132 @@
+﻿<script type="text/x-kendo-template" id="other-products">
+    <section class="content-wrapper main-content clear-fix">    
+        <h3>Technlogy Stack</h3>
+        <ol class="round">
+            <li class="one">
+                <h5>.NET</h5>
+                ASP.NET MVC 4, Web API, OData, Entity Framework        
+            </li>
+            <li class="two">
+                <h5>Kendo UI Web Framework</h5>
+                MVVM, SPA, Grid, DataSource
+            </li>
+            <li class="three">
+                <h5>Patterns</h5>
+                Unit of Work, Repository, MVVM
+            </li>
+        </ol>
+        <h3>View Products</h3><br/>
+            <div class="k-content" style="width:100%">    
+            <div id="productsForm">
+            <div id="productGrid" 
+                data-role="grid"
+                data-sortable="true"
+                data-pageable="true"
+                data-filterable="true"
+                data-bind="source: dataSource, events:{dataBound: dataBound, change: onChange}"
+                data-editable = "inline"
+                data-selectable="true" 
+                data-columns='[
+                    { field: "ProductID", title: "Id", width: "50px" }, 
+                    { field: "ProductName", title: "Name", width: "300px" }, 
+                    { field: "UnitPrice", title: "Price", format: "{0:c}", width: "100px" },                    
+                    { field: "Discontinued", width: "150px" }, 
+                    { command : [ "edit", "destroy", { text: "Edit Details", click: editProduct } ], title: "Action",  } ]'>
+            </div>
+            </div>
+            </div>
+    </section>    
+</script>
+
+<script>
+    function editProduct(e) {
+        e.preventDefault();
+        var tr = $(e.currentTarget).closest("tr");
+        var dataItem = $("#productGrid").data("kendoGrid").dataItem(tr);
+        window.location.href = '#/productEdit/' + dataItem.ProductID;
+    }
+
+    var lastSelectedProductId;
+
+    var crudServiceBaseUrl = "http://longle.azurewebsites.net/odata/Product";
+    var productsModel = kendo.observable({
+        dataSource: dataSource = new kendo.data.DataSource({
+            type: "odata",
+            transport: {
+                read: {
+                    url: crudServiceBaseUrl,
+                    dataType: "jsonp"
+                },
+                update: {
+                    url: function (data) {
+                        return crudServiceBaseUrl + "(" + data.ProductID + ")";
+                    },
+                    dataType: "jsonp"
+                },
+                destroy: {
+                    url: function (data) {
+                        return crudServiceBaseUrl + "(" + data.ProductID + ")";
+                    },
+                    dataType: "jsonp"
+                }
+            },
+            batch: false,
+            serverPaging: true,
+            serverSorting: true,
+            serverFiltering: true,
+            pageSize: 10,
+            schema: {
+                data: function (data) {
+                    return data.value;
+                },
+                total: function (data) {
+                    return data["odata.count"];
+                },
+                errors: function (data) {
+                },
+                model: {
+                    id: "ProductID",
+                    fields: {
+                        ProductID: { type: "number", editable: false, nullable: true },
+                        ProductName: { type: "string", validation: { required: true } },
+                        UnitPrice: { type: "number", validation: { required: true, min: 1 } },
+                        Discontinued: { type: "boolean" },
+                        UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                    }
+                }
+            },
+            error: function (e) {
+                var message = e.xhr.responseJSON["odata.error"].message.value;
+                var innerMessage = e.xhr.responseJSON["odata.error"].innererror.message;
+                alert(message + "\n\n" + innerMessage);
+            }
+        }),
+        dataBound: function (arg) {
+            if (lastSelectedProductId == null) return; // check if there was a row that was selected
+            var view = this.dataSource.view(); // get all the rows
+            for (var i = 0; i < view.length; i++) { // iterate through rows
+                if (view[i].ProductID == lastSelectedProductId) { // find row with the lastSelectedProductd
+                    var grid = arg.sender; // get the grid
+                    grid.select(grid.table.find("tr[data-uid='" + view[i].uid + "']")); // set the selected row
+                    break;
+                }
+            }
+        },
+        onChange: function (arg) {
+            var grid = arg.sender;
+            var dataItem = grid.dataItem(grid.select());
+            lastSelectedProductId = dataItem.ProductID;
+        }
+    });
+
+    $(document).bind("viewSwtichedEvent", function (e, args) { // subscribe to the viewSwitchedEvent
+        if (args.name == "products") { // check if this view was switched too
+            if (args.isRemotelyLoaded) { // check if this view was remotely loaded from server
+                kendo.bind($("#productsForm"), productsModel); // bind the view to the model
+            } else {// view already been loaded in cache
+                productsModel.dataSource.fetch(function () { }); // refresh grid
+            }
+        }
+    });
+
+</script>
