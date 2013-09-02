@@ -48,3 +48,9 @@ img {
     width: 450px;
     height: 250px;
 }
+
+#tb-logout {
+position:absolute;
+top:85px;
+left:1050px;
+}
