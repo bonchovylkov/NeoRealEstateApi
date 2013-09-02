@@ -46,12 +46,16 @@ window.viewsFactory = (function () {
 	function getCreateView() {
 	    return getTemplate("create-view");
 	}
+	function getAdminView() {
+	    return getTemplate("admin");
+	}
 
 	return {
 	    getLoginView: getLoginView,
 	    getAdvertsView: getAdvertsView,
 	    getSingleAdvertView: getSingleAdvertView,
 	    getAdvertsViewWithLogOut: getAdvertsViewWithLogOut,
-	    getCreateView: getCreateView
+	    getCreateView: getCreateView,
+        getAdminView: getAdminView
 	};
 }());

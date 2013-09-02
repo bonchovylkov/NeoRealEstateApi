@@ -129,6 +129,28 @@ var application = (function () {
         }
     });
 
+    router.route("/admin", function () {
+        if (data.users.currentUser()) {
+            debugger;
+            viewsFactory.getAdminView()
+                .then(function (advertsViewHtml) {
+                    var view = new kendo.View(advertsViewHtml);
+
+                    appLayout.showIn("#main-content", view);
+                });
+        }
+        else {
+
+            var view = new kendo.View("<div id='error-message' style='margin-top: 50px;font-size:large;'>You don't have rights to access this page!</div>");
+            appLayout.showIn("#main-content", view);
+            // $("#adverts-template").show();
+            //setInterval(function() {
+            //    router.navigate("/");
+            //}, 4000);
+
+        }
+    });
+
     router.route("/create", function () {
         viewsFactory.getCreateView()
         .then(function (createViewHtml) {

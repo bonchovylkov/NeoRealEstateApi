@@ -1,0 +1,169 @@
+﻿<div id="products" class="k-content">
+
+    <div id="clientsDb">
+
+        <div id="grid" style="height: 500px"></div>
+
+    </div>
+
+    <style scoped>
+        #clientsDb {
+            height: 529px;
+            padding: 51px 4px 0 4px;
+            background-color: #efeeef;
+        }
+    </style>
+
+
+    <script>
+        $(document).ready(function () {
+            function editProduct(e) {
+                e.preventDefault();
+                var tr = $(e.currentTarget).closest("tr");
+                var dataItem = $("#grid").data("kendoGrid").dataItem(tr);
+                window.location.href = '#/productEdit/' + dataItem.id;
+            }
+
+            var dataSource = new kendo.data.DataSource({
+                //type: "odata",
+                transport: {
+                    read: {
+                        //url: "http://demos.kendoui.com/service/Northwind.svc/Employees",
+                        url: "http://localhost:38338/api/adverts/",
+                        dataType: "json"
+                    },
+                    update: {
+                        //url: "http://demos.kendoui.com/service/Northwind.svc/Employees",
+                        url: "http://localhost:38338/api/adverts/",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "id",
+                        fields: {
+                            id: { type: "number", editable: false, nullable: true },
+                            headline: { type: "string" },
+                            town: { type: "string" },
+                            postDate: { type: "date" },
+                            price: { type: "number" }
+                        }
+                    }
+                },
+                
+            });
+
+            $("#grid").kendoGrid({
+                dataSource: dataSource,
+                //groupable: true,
+                toolbar: ["create"],
+                sortable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true
+                },
+                editable: true,
+                columns: [{
+                    field: "id",
+                    width: 20,
+                    title: "ID"
+                }, {
+                    field: "headline",
+                    width: 90,
+                    title: "First Name"
+                }, {
+                    width: 100,
+                    field: "town"
+                }, {
+                    width: 90,
+                    field: "postDate",
+                    title: "Post Date",
+                    //template: '#= kendo.toString(postDate,"dd MMMM yyyy") #'
+                    format: "{0:MM/dd/yyyy}"
+                }, {
+                    width: 50,
+                    field: "price",
+                    format: "{0:c}"
+                }, {
+                    width: 100,
+                    command: ["edit", "destroy", { text: "Edit Details", click: editProduct }], title: "Action",
+                }
+                ]
+            });
+
+
+        });
+    </script>
+
+    <style>
+        .photo {
+            width: 140px;
+        }
+
+        .details {
+            width: 400px;
+        }
+
+        .title {
+            display: block;
+            font-size: 1.6em;
+        }
+
+        .description {
+            display: block;
+            padding-top: 1.6em;
+        }
+
+        .employeeID {
+            font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            font-size: 50px;
+            font-weight: bold;
+            color: #898989;
+        }
+
+        td.photo, .employeeID {
+            text-align: center;
+        }
+
+        #employeesTable td {
+            background: -moz-linear-gradient(top, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.15) 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.05)), color-stop(100%,rgba(0,0,0,0.15)));
+            background: -webkit-linear-gradient(top, rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+            background: -o-linear-gradient(top, rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+            background: -ms-linear-gradient(top, rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.15) 100%);
+            padding: 20px;
+        }
+
+        .employeesDropDownWrap {
+            display: block;
+            margin: 0 auto;
+        }
+
+        #emplooyeesDropDown-list .k-item {
+            overflow: hidden;
+        }
+
+        #emplooyeesDropDown-list img {
+            -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
+            -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
+            box-shadow: 0 0 2px rgba(0,0,0,.4);
+            float: left;
+            margin: 5px 20px 5px 0;
+        }
+
+        #emplooyeesDropDown-list h3 {
+            margin: 30px 0 10px 0;
+            font-size: 2em;
+        }
+
+        #emplooyeesDropDown-list p {
+            margin: 0;
+        }
+
+        #products {
+            width: 960px;
+            margin: 0 auto;
+        }
+    </style>
+</div>
