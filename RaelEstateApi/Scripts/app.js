@@ -4,7 +4,7 @@
 var application = (function () {
     var appLayout =
 		new kendo.Layout('<div id="main-content" class="span7"></div><div id="advert-details" class="span5 offset1"></div>');
-    var data = persisters.get("http://localhost:38338/api/");
+    var data = persisters.get("http://neodymiumestates.apphb.com/api/");
     vmFactory.setPersister(data);
 
     var router = new kendo.Router();
