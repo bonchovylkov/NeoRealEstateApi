@@ -15,7 +15,7 @@ namespace RaelEstateApi.Models
         [DataMember(Name = "headline")]
         public string Headline { get; set; }
 
-        [DataMember(Name = "content")]
+        [DataMember(Name = "text")]
         public string Text { get; set; }
 
         [DataMember(Name = "pictures")]
@@ -29,6 +29,9 @@ namespace RaelEstateApi.Models
 
         [DataMember(Name = "tags")]
         public IEnumerable<string> Tags { get; set; }
+
+        [DataMember(Name = "tagsString")]
+        public string TagsString { get; set; }
 
         [DataMember(Name="postDate")]
         public DateTime PostDate { get; set; }

@@ -1,6 +1,15 @@
 ﻿<!--<button class="btn btn-info" id="tb-logout" data-bind="click: logout">Logout</button>-->
 <h1 class="btn" id="accounts-headline">Estate Adverts</h1>
-<button class="btn btn-info" id="tb-logout" data-bind="click:logout"> Logout</button>
+<div class="btn-group">
+    <a href="#/create">
+        <button class="btn btn-info" id="tb-create">
+            Create
+        </button>
+    </a>
+    <button class="btn btn-info" id="tb-logout" data-bind="click: logout">
+        Logout
+    </button>
+</div>
 <ul id="menu" data-template="advert-template" class="nav nav-tabs nav-stacked" data-bind="source: adverts"></ul>
 
 <script type="text/x-kendo-template" id="advert-template">

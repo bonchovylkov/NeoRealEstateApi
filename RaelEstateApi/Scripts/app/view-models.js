@@ -68,7 +68,34 @@ window.vmFactory = (function () {
         })
     }
 
-
+    function getCreateVM(successCallback) {
+        var viewModel = {
+            headline: "headline",
+            text: "text",
+            town: "town",
+            address: "address",
+            tagsString: "tags",
+            price: 123,
+            create: function () {
+                var advertModel = {
+                    headline: this.get("headline"),
+                    text: this.get("text"),
+                    town: this.get("town"),
+                    address: this.get("address"),
+                    tagsString: this.get("tagsString"),
+                    price: this.get("price"),
+                }
+                debugger;
+                data.adverts.create(advertModel)
+                .then(function (result) {
+                    if (successCallback) {
+                        successCallback();
+                    }
+                });
+            }
+        }
+        return kendo.observable(viewModel);
+    }
 
     return {
 
@@ -78,6 +105,7 @@ window.vmFactory = (function () {
 
         getLoginVM: getLoginViewModel,
         getAllAdvertsVM: getAllAdvertsViewModel,
-        getSingleAdvertVM: getSingleAdvertViewModel
+        getSingleAdvertVM: getSingleAdvertViewModel,
+        getCreateVM: getCreateVM,
     };
 }());

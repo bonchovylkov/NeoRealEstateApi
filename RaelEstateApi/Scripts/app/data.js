@@ -101,6 +101,10 @@ window.persisters = (function () {
 		getById: function (id) {
 		    return httpRequester.getJSON(this.apiUrl + "/" +id+ "?sessionKey=" + localStorage.getItem("sessionKey"));
 		},
+		create: function (createModel) {
+		    debugger;
+		    return httpRequester.postJSON(this.apiUrl + "?sessionKey=" + localStorage.getItem("sessionKey"), createModel);
+		},
 		//deposit: function (sum,id) {
 		//    return httpRequester.putJSON(this.apiUrl + id + "?depositSum=" + sum + "&sessionKey=" + localStorage.getItem("sessionKey"))
         //        .then(function () {

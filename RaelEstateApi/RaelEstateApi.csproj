@@ -272,6 +272,7 @@
     <Content Include="Scripts\libs\_references.js" />
     <Content Include="Scripts\partials\adverts-list-with-logout.html" />
     <Content Include="Scripts\partials\adverts-list.html" />
+    <Content Include="Scripts\partials\create-view.html" />
     <Content Include="Scripts\partials\login-form.html" />
     <Content Include="Scripts\partials\login-register.html" />
     <Content Include="Scripts\partials\single-advert.html" />

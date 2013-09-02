@@ -92,6 +92,7 @@ var application= (function () {
     router.route("/advertsadmin", function () {
         if (data.users.currentUser()) {
             $("#main-content").hide();
+            $("#advert-details").hide();
             $("#tb-logout").show();
             debugger;
             grid(router);
@@ -99,6 +100,22 @@ var application= (function () {
         else {
             router.navigate("/");
         }
+    });
+
+    router.route("/create", function () {
+        viewsFactory.getCreateView()
+        .then(function (createViewHtml) {
+            var createVM = vmFactory.getCreateVM(function () {
+                router.navigate("/adverts");
+            });
+            debugger;
+            var view = new kendo.View(createViewHtml,
+                    { model: createVM });
+
+            //$("#advert-details").hide();
+            appLayout.showIn("#advert-details", view);
+            $("#advert-details").fadeIn(500);
+        })
     });
 
     $(function () {

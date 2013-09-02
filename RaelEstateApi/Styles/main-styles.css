@@ -3,11 +3,11 @@
 width:635px;
 }*/
 
-#tb-logout {
+/*#tb-logout {
 position:absolute;
 top:80px;
 left:500px;
-}
+}*/
 
 #wrapper {
     padding: 1%;
@@ -47,10 +47,4 @@ a:hover {
 img {
     width: 450px;
     height: 250px;
-}
-
-#tb-logout {
-position:absolute;
-top:85px;
-left:1050px;
 }

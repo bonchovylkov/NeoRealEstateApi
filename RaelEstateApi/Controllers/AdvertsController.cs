@@ -229,6 +229,8 @@ namespace RaelEstateApi.Controllers
 
         private static Advert GenerateAdvertEntity(AdvertFullModel advertModel, RealEstateContext context, User user)
         {
+            var splittedTags = advertModel.TagsString.Split(SplitSymbols, StringSplitOptions.RemoveEmptyEntries);
+
             var advertEntity = new Advert()
             {
                 Headline = advertModel.Headline,
@@ -236,14 +238,14 @@ namespace RaelEstateApi.Controllers
                 User = user,
                 PostDate = DateTime.Now,
                 Address = advertModel.Address,
-                Tags = AddOrUpdateTags(advertModel.Tags, context, advertModel.Headline),
+                Tags = AddOrUpdateTags(splittedTags, context, advertModel.Headline),
                 Town = AddOrUpdateTown(context, advertModel.Town),
-                Pictures =
-                    (from pic in advertModel.Pictures
-                     select new Picture
-                     {
-                         Url = pic
-                     }).ToList(),
+                //Pictures =
+                //    (from pic in advertModel.Pictures
+                //     select new Picture
+                //     {
+                //         Url = pic
+                //     }).ToList(),
                 Price = advertModel.Price,
             };
 

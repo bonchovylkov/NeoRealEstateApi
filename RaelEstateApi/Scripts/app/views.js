@@ -42,10 +42,16 @@ window.viewsFactory = (function () {
 	function getAdvertsViewWithLogOut() {
 	    return getTemplate("adverts-list-with-logout");
 	}
+
+	function getCreateView() {
+	    return getTemplate("create-view");
+	}
+
 	return {
 	    getLoginView: getLoginView,
 	    getAdvertsView: getAdvertsView,
 	    getSingleAdvertView: getSingleAdvertView,
-	    getAdvertsViewWithLogOut: getAdvertsViewWithLogOut
+	    getAdvertsViewWithLogOut: getAdvertsViewWithLogOut,
+	    getCreateView: getCreateView
 	};
 }());
