@@ -119,6 +119,7 @@ var application = (function () {
                     grid(router);
                 }
                 else {
+                    alert("You don't have permissions");
                     router.navigate("/");
                 }
             })
