@@ -74,10 +74,9 @@ window.persisters = (function () {
 		        router.navigate("/");
 
 		    }, function () {
-		        debugger;
-		        console.log("in error logout");
 		        clearLocalStorage();
 		        var router = application.router();
+		        $("#advert-details").html("");
 		        router.navigate("/");
 		    });
 		    }

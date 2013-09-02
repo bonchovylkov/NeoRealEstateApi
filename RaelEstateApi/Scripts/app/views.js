@@ -39,10 +39,13 @@ window.viewsFactory = (function () {
 	function getSingleAdvertView() {
 	    return getTemplate("single-advert");
 	}
-
+	function getAdvertsViewWithLogOut() {
+	    return getTemplate("adverts-list-with-logout");
+	}
 	return {
 	    getLoginView: getLoginView,
 	    getAdvertsView: getAdvertsView,
 	    getSingleAdvertView: getSingleAdvertView,
+	    getAdvertsViewWithLogOut: getAdvertsViewWithLogOut
 	};
 }());

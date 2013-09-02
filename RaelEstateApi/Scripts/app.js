@@ -25,9 +25,9 @@ var application= (function () {
                     var view = new kendo.View(loginViewHtml,
                         { model: loginVm });
                     
-                    $("#main-content").hide();
+                   // $("#main-content").hide();
                     appLayout.showIn("#main-content", view);
-                    $("main-content").fadeIn(500);
+                   // $("main-content").fadeIn(500);
 
                     $("#tabstrip").kendoTabStrip({
                         animation: {
@@ -41,33 +41,52 @@ var application= (function () {
     });
 
     router.route("/adverts", function () {
-        viewsFactory.getAdvertsView()
-        .then(function (advertsViewHtml) {
-            vmFactory.getAllAdvertsVM()
-            .then(function (advertsVM) {
-                var view = new kendo.View(advertsViewHtml,
-                    { model: advertsVM });
-                appLayout.showIn("#main-content", view);
+        if (data.users.currentUser()) {
+            viewsFactory.getAdvertsViewWithLogOut()
+            .then(function (advertsViewHtml) {
+                vmFactory.getAllAdvertsVM()
+                .then(function (advertsVM) {
+                    var view = new kendo.View(advertsViewHtml,
+                        { model: advertsVM });
+                    appLayout.showIn("#main-content", view);
 
+                })
             })
-        })
+        }
+        else {
+            viewsFactory.getAdvertsView()
+            .then(function (advertsViewHtml) {
+                vmFactory.getAllAdvertsVM()
+                .then(function (advertsVM) {
+                    var view = new kendo.View(advertsViewHtml,
+                        { model: advertsVM });
+                    appLayout.showIn("#main-content", view);
+
+                })
+            })
+        }
     });
 
     router.route("/adverts-:id", function (id) {
-        viewsFactory.getSingleAdvertView()
-        .then(function (advertViewHtml) {
-            vmFactory.getSingleAdvertVM(id)
-            .then(function (advertVM) {
-                var view = new kendo.View(advertViewHtml,
-                    { model: advertVM });
-                console.log(advertVM)
+        if (data.users.currentUser()) {
+            viewsFactory.getSingleAdvertView()
+            .then(function (advertViewHtml) {
+                vmFactory.getSingleAdvertVM(id)
+                .then(function (advertVM) {
+                    var view = new kendo.View(advertViewHtml,
+                        { model: advertVM });
+                    console.log(advertVM)
 
-                $("#advert-details").hide();
-                appLayout.showIn("#advert-details", view);
-                $("#advert-details").fadeIn(500);
-                $("#myCarousel").carousel();
+                    $("#advert-details").hide();
+                    appLayout.showIn("#advert-details", view);
+                    $("#advert-details").fadeIn(500);
+                    $("#myCarousel").carousel();
+                })
             })
-        })
+        }
+        else {
+            router.navigate("/");
+        }
     });
 
     $(function () {

@@ -14,7 +14,7 @@ left:500px;
     width: 80%;
     margin: 0 auto;
     background-color: #f3f3f3;
-    min-height: 900px;
+    min-height: 900px !important;
 /*position:absolute;*/
 /*top:20px;
 left:10%;*/
@@ -34,11 +34,11 @@ margin-bottom:15px;
 font-size:1.6em;
 }
 
-#adverts-btn {
+/*#adverts-btn {
     position: absolute;
     top: 75px;
     right: 10px;
-}
+}*/
 
 a:hover {
     text-decoration:none !important;

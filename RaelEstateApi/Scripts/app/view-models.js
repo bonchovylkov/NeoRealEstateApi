@@ -39,7 +39,19 @@ window.vmFactory = (function () {
         return data.adverts.all()
         .then(function (adverts) {
             var viewModel = {
-                adverts: adverts
+                adverts: adverts,
+                logout: function () {
+                    data.users.logout()
+                                       .then(function () {
+                                           if (successCallback) {
+                                               successCallback();
+                                           }
+                                       }, function () {
+                                           if (errorCallback) {
+                                               errorCallback();
+                                           }
+                                       });
+                },
             };
 
             return kendo.observable(viewModel);
@@ -56,16 +68,16 @@ window.vmFactory = (function () {
         })
     }
 
-    
-	
-	return {
-		
-		setPersister: function (persister) {
-			data = persister
-		},
 
-		getLoginVM: getLoginViewModel,
-		getAllAdvertsVM: getAllAdvertsViewModel,
-		getSingleAdvertVM: getSingleAdvertViewModel
-	};
+
+    return {
+
+        setPersister: function (persister) {
+            data = persister
+        },
+
+        getLoginVM: getLoginViewModel,
+        getAllAdvertsVM: getAllAdvertsViewModel,
+        getSingleAdvertVM: getSingleAdvertViewModel
+    };
 }());

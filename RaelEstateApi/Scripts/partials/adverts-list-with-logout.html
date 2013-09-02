@@ -1,0 +1,20 @@
+﻿<!--<button class="btn btn-info" id="tb-logout" data-bind="click: logout">Logout</button>-->
+<h1 class="btn" id="accounts-headline">Estate Adverts</h1>
+<button class="btn btn-info" id="tb-logout" data-bind="click:logout"> Logout</button>
+<ul id="menu" data-template="advert-template" class="nav nav-tabs nav-stacked" data-bind="source: adverts"></ul>
+
+<script type="text/x-kendo-template" id="advert-template">
+    <li class="advert-info">
+        <a href="\#/adverts-#:id #">
+            <span data-bind="text: headline"> </span>
+            <span data-bind="text: town"></span>
+            <span>Post date:</span>
+            <span data-bind="text: postDate"></span>
+            <span>
+                #for (var i = 0; i < tags.length; i++) { #
+                <span>#=tags[i]# </span>
+                #}#
+            </span>
+        </a>
+    </li>
+</script>
