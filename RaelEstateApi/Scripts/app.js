@@ -131,13 +131,22 @@ var application = (function () {
 
     router.route("/admin", function () {
         if (data.users.currentUser()) {
-            debugger;
-            viewsFactory.getAdminView()
-                .then(function (advertsViewHtml) {
-                    var view = new kendo.View(advertsViewHtml);
+            data.users.isAdmin().then(function (isAdmin) {
+                if (isAdmin) {
+                    viewsFactory.getAdminView()
+                   .then(function (advertsViewHtml) {
+                       var view = new kendo.View(advertsViewHtml);
 
-                    appLayout.showIn("#main-content", view);
-                });
+                       appLayout.showIn("#main-content", view);
+
+                       $("#advert-details").hide();
+                   });
+                } else {
+                    alert("You don't have permissions");
+                    router.navigate("/");
+                }
+               
+            })
         }
         else {
 
